@@ -3,6 +3,21 @@
   
     
     <entry>
+      <title>设计模式之--代理模式</title>
+      <link href="/2018/08/18/proxy/"/>
+      <url>/2018/08/18/proxy/</url>
+      <content type="html"><![CDATA[<h2 id="概念认知"><a href="#概念认知" class="headerlink" title="概念认知"></a>概念认知</h2><ul><li><strong>代理模式</strong>:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问.<blockquote><p><strong>Proxy Pattern</strong>: Provide a surrogate or placeholder for another object to control access to it.</p></blockquote></li></ul>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 设计模式 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2018/08/17/hello-world/"/>
       <url>/2018/08/17/hello-world/</url>

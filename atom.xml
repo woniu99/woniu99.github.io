@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-17T01:48:13.777Z</updated>
+  <updated>2018-08-18T11:33:35.354Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>设计模式之--代理模式</title>
+    <link href="http://yoursite.com/2018/08/18/proxy/"/>
+    <id>http://yoursite.com/2018/08/18/proxy/</id>
+    <published>2018-08-18T11:23:13.000Z</published>
+    <updated>2018-08-18T11:33:35.354Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概念认知"><a href="#概念认知" class="headerlink" title="概念认知"></a>概念认知</h2><ul><li><strong>代理模式</strong>:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问.<blockquote><p><strong>Proxy Pattern</strong>: Provide a surrogate or placeholder for another object to control access to it.</p></blockquote></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;概念认知&quot;&gt;&lt;a href=&quot;#概念认知&quot; class=&quot;headerlink&quot; title=&quot;概念认知&quot;&gt;&lt;/a&gt;概念认知&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代理模式&lt;/strong&gt;:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问.
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
