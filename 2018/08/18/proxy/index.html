@@ -5,20 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
-  <title>设计模式之--代理模式 | Snail99 Blog</title>
+  <title>设计模式之--代理模式(一) | Snail99 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="概念认知 代理模式:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.">
+  <meta name="description" content="1. 概念认知1.1 定义 代理模式: 给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.    1.2 模型  由 图 1.1可知,代理模式有三个角色:   Interface(接口角色):">
 <meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式之--代理模式">
+<meta property="og:title" content="设计模式之--代理模式(一)">
 <meta property="og:url" content="http://yoursite.com/2018/08/18/proxy/index.html">
 <meta property="og:site_name" content="Snail99 Blog">
-<meta property="og:description" content="概念认知 代理模式:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.">
+<meta property="og:description" content="1. 概念认知1.1 定义 代理模式: 给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.    1.2 模型  由 图 1.1可知,代理模式有三个角色:   Interface(接口角色):">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-18T11:33:35.354Z">
+<meta property="og:image" content="http://on-img.com/chart_image/5b783071e4b08d3622b3e7bc.png">
+<meta property="og:updated_time" content="2018-08-18T15:47:05.204Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="设计模式之--代理模式">
-<meta name="twitter:description" content="概念认知 代理模式:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.">
+<meta name="twitter:title" content="设计模式之--代理模式(一)">
+<meta name="twitter:description" content="1. 概念认知1.1 定义 代理模式: 给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问. Proxy Pattern: Provide a surrogate or placeholder for another object to control access to it.    1.2 模型  由 图 1.1可知,代理模式有三个角色:   Interface(接口角色):">
+<meta name="twitter:image" content="http://on-img.com/chart_image/5b783071e4b08d3622b3e7bc.png">
   
     <link rel="alternative" href="/atom.xml" title="Snail99 Blog" type="application/atom+xml">
   
@@ -100,7 +102,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      设计模式之--代理模式
+      设计模式之--代理模式(一)
     </h1>
   
 
@@ -109,12 +111,42 @@
     <div class="article-entry" itemprop="articleBody">
       
         
-        <h2 id="概念认知"><a href="#概念认知" class="headerlink" title="概念认知"></a>概念认知</h2><ul>
-<li><strong>代理模式</strong>:给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问.<blockquote>
+        <h2 id="1-概念认知"><a href="#1-概念认知" class="headerlink" title="1. 概念认知"></a>1. 概念认知</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><ul>
+<li><strong>代理模式</strong>: 给某一个对象提供一个代理或占位符,并由代理对象来控制对原对象的访问.<blockquote>
 <p><strong>Proxy Pattern</strong>: Provide a surrogate or placeholder for another object to control access to it.</p>
 </blockquote>
 </li>
 </ul>
+<h3 id="1-2-模型"><a href="#1-2-模型" class="headerlink" title="1.2 模型"></a>1.2 模型</h3><p><img src="http://on-img.com/chart_image/5b783071e4b08d3622b3e7bc.png" alt="图 1.1 代理模式模型图"></p>
+<ul>
+<li><strong>由 图 1.1可知,代理模式有三个角色:</strong></li>
+</ul>
+<ol>
+<li><strong><code>Interface</code></strong>(接口角色): 声明了真实对象和代理对象的共同接口,使在任何使用真实对象的地方都可以使用代理对象.</li>
+<li><strong><code>Proxy</code></strong>(代理角色): 包含对真实对象的引用,可以在任何时候操作真实对象.</li>
+<li><strong><code>RealObject</code></strong>(真实对象角色): 定义了代理角色所代表的的真实对象,实现了真实的业务操作,客户端可以通过代理主题角色间接调用真实对象中定义的操作.</li>
+</ol>
+<h3 id="1-3-特点"><a href="#1-3-特点" class="headerlink" title="1.3 特点"></a>1.3 特点</h3><ol>
+<li>执行者,被代理人.</li>
+<li>对于被代理人来说,这件事是一定要做的,但是自己不想做或没有时间做,找代理.</li>
+<li>需要获取到被代理人的个人资料.</li>
+</ol>
+<h3 id="1-4-优缺点"><a href="#1-4-优缺点" class="headerlink" title="1.4 优缺点"></a>1.4 优缺点</h3><ol>
+<li><strong>优点:</strong> </li>
+</ol>
+<ul>
+<li>能够协调调用者和被调用者,在一定程度上降低了系统耦合度.</li>
+<li>可以针对接口进行编程,增加和更换代码无须修改源代码,符合开闭原则,具有较好的灵活性和可扩展性.</li>
+</ul>
+<p>2.<strong> 缺点:</strong></p>
+<ul>
+<li>由于增加了代理对象,因此有些类型的代理模式可能会造成请求的处理速度变慢.</li>
+</ul>
+<h2 id="2-示例代码"><a href="#2-示例代码" class="headerlink" title="2. 示例代码"></a>2. 示例代码</h2><h3 id="2-1-Interface-class"><a href="#2-1-Interface-class" class="headerlink" title="2.1 Interface.class"></a>2.1 Interface.class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Interface</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">somethingElse</span><span class="params">(String args)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-RealObject-class"><a href="#2-2-RealObject-class" class="headerlink" title="2.2 RealObject.class"></a>2.2 RealObject.class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RealObject</span> <span class="keyword">implements</span> <span class="title">Interface</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"doSomething."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">somethingElse</span><span class="params">(String args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"somethingElse: "</span> + args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-SimpleProxy-class"><a href="#2-2-SimpleProxy-class" class="headerlink" title="2.2 SimpleProxy.class"></a>2.2 SimpleProxy.class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleProxy</span> <span class="keyword">implements</span> <span class="title">Interface</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Interface proxied;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimpleProxy</span><span class="params">(Interface proxied)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.proxied = proxied;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doSomething</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"SimpleProxy doSomething."</span>);</span><br><span class="line">        proxied.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">somethingElse</span><span class="params">(String args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"SimpleProxy somethingElse:"</span> + args);</span><br><span class="line">        proxied.somethingElse(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-SimpleProxyDemo-class"><a href="#2-3-SimpleProxyDemo-class" class="headerlink" title="2.3 SimpleProxyDemo.class"></a>2.3 SimpleProxyDemo.class</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleProxyDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">consumer</span><span class="params">(Interface iface)</span> </span>&#123;</span><br><span class="line">        iface.doSomething();</span><br><span class="line">        iface.somethingElse(<span class="string">"bonobo"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        consumer(<span class="keyword">new</span> SimpleProxy(<span class="keyword">new</span> RealObject()));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-代码输出结果为"><a href="#2-4-代码输出结果为" class="headerlink" title="2.4 代码输出结果为:"></a>2.4 代码输出结果为:</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SimpleProxy doSomething.</span><br><span class="line">doSomething.</span><br><span class="line">SimpleProxy somethingElse:biubiubiu~</span><br><span class="line">somethingElse: biubiubiu~</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -123,7 +155,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/08/18/proxy/" data-id="cjkzchj130000o8y5ayo5riit" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/08/18/proxy/" data-id="cjkzmhnmy0002ucy54bg40ik4" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -133,6 +165,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2018/08/19/jdk-proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          jdk_proxy
+        
+      </div>
+    </a>
   
   
     <a href="/2018/08/17/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -157,7 +198,11 @@
       <ul>
         
           <li>
-            <a href="/2018/08/18/proxy/">设计模式之--代理模式</a>
+            <a href="/2018/08/19/jdk-proxy/">jdk_proxy</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/18/proxy/">设计模式之--代理模式(一)</a>
           </li>
         
           <li>
@@ -173,7 +218,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式-java/">设计模式 java</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -182,7 +227,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">3</span></li></ul>
     </div>
   </div>
 

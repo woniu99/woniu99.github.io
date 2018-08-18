@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/08/19/jdk-proxy/</loc>
+    
+    <lastmod>2018-08-18T16:13:44.851Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/08/18/proxy/</loc>
     
-    <lastmod>2018-08-18T11:33:35.354Z</lastmod>
+    <lastmod>2018-08-18T15:47:05.204Z</lastmod>
     
   </url>
   
