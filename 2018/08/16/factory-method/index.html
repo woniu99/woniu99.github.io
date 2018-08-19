@@ -16,7 +16,8 @@
 <meta property="og:description" content="2.工厂方法模式2.1 定义 工厂方法模式(Factory Method Pattern)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Patte">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://on-img.com/chart_image/5b792108e4b0be50eae546ba.png">
-<meta property="og:updated_time" content="2018-08-19T07:59:02.552Z">
+<meta property="og:image" content="http://on-img.com/chart_image/5b79565ee4b0555b39e9b9a1.png">
+<meta property="og:updated_time" content="2018-08-19T12:36:25.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之--工厂模式(二)">
 <meta name="twitter:description" content="2.工厂方法模式2.1 定义 工厂方法模式(Factory Method Pattern)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Patte">
@@ -116,7 +117,52 @@
 </ul>
 <a id="more"></a>
 <h3 id="2-2-模型结构图"><a href="#2-2-模型结构图" class="headerlink" title="2.2 模型结构图"></a>2.2 模型结构图</h3><p><img src="http://on-img.com/chart_image/5b792108e4b0be50eae546ba.png" alt="图1.2 工厂方法模式结构图"></p>
-<h3 id="2-3-代码示例"><a href="#2-3-代码示例" class="headerlink" title="2.3 代码示例"></a>2.3 代码示例</h3><h4 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3.1"></a>2.3.1</h4>
+<h3 id="2-3-代码示例"><a href="#2-3-代码示例" class="headerlink" title="2.3 代码示例"></a>2.3 代码示例</h3><ul>
+<li>利用工厂模式设计一个日志记录器,结构如下:</li>
+</ul>
+<p><img src="http://on-img.com/chart_image/5b79565ee4b0555b39e9b9a1.png" alt="图1.3 日志记录器结构图"></p>
+<h4 id="2-3-1-Logger-java"><a href="#2-3-1-Logger-java" class="headerlink" title="2.3.1 Logger.java"></a>2.3.1 Logger.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Logger</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeLog</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-2-FileLogger-java"><a href="#2-3-2-FileLogger-java" class="headerlink" title="2.3.2 FileLogger.java"></a>2.3.2 FileLogger.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileLogger</span> <span class="keyword">implements</span> <span class="title">Logger</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeLog</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"文件日志记录"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-3-FileLogger-java"><a href="#2-3-3-FileLogger-java" class="headerlink" title="2.3.3 FileLogger.java"></a>2.3.3 FileLogger.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LoggerFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Logger <span class="title">createLogger</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-4-FileLoggerFactory-java"><a href="#2-3-4-FileLoggerFactory-java" class="headerlink" title="2.3.4 FileLoggerFactory.java"></a>2.3.4 FileLoggerFactory.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileLoggerFactory</span> <span class="keyword">implements</span> <span class="title">LoggerFactory</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Logger <span class="title">createLogger</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 创建文件日志记录对象</span></span><br><span class="line">        Logger logger = <span class="keyword">new</span> FileLogger();</span><br><span class="line">        <span class="comment">// 创建文件代码...</span></span><br><span class="line">        <span class="keyword">return</span> logger;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-5-XMLUtil-java"><a href="#2-3-5-XMLUtil-java" class="headerlink" title="2.3.5 XMLUtil.java"></a>2.3.5 XMLUtil.java</h4><ul>
+<li>通过配置文件方式获取类名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.w3c.dom.Document;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.Node;</span><br><span class="line"><span class="keyword">import</span> org.w3c.dom.NodeList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilder;</span><br><span class="line"><span class="keyword">import</span> javax.xml.parsers.DocumentBuilderFactory;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">XMLUtil</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 该方法用于从XML配置文件中提取具体类的类名,并返回一个实例对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Object <span class="title">getBean</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建DOM文档对象</span></span><br><span class="line">            DocumentBuilderFactory dFactory = DocumentBuilderFactory.newInstance();</span><br><span class="line">            DocumentBuilder builder = dFactory.newDocumentBuilder();</span><br><span class="line">            Document doc;</span><br><span class="line">            doc = builder.parse(<span class="keyword">new</span> File(<span class="string">"config.xml"</span>));</span><br><span class="line">            <span class="comment">// 获取包含类名的文本节点</span></span><br><span class="line">            NodeList nodeList = doc.getElementsByTagName(<span class="string">"className"</span>);</span><br><span class="line">            Node classNode = nodeList.item(<span class="number">0</span>).getFirstChild();</span><br><span class="line">            String cName = classNode.getNodeValue();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 通过类名生成实例对象并返回</span></span><br><span class="line">            Class c = Class.forName(<span class="string">"factory.factorymethod."</span>+cName);</span><br><span class="line">            Object obj = c.newInstance();</span><br><span class="line">            <span class="keyword">return</span> obj;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-3-6-config-xml"><a href="#2-3-6-config-xml" class="headerlink" title="2.3.6 config.xml"></a>2.3.6 config.xml</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">?xml version="1.0" ?&gt;</span><br><span class="line"><span class="comment">&lt;!-- config.xml --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">config</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">className</span>&gt;</span>FileLoggerFactory<span class="tag">&lt;/<span class="name">className</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">config</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-3-7-Client-java"><a href="#2-3-7-Client-java" class="headerlink" title="2.3.7 Client.java"></a>2.3.7 Client.java</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LoggerFactory factory;</span><br><span class="line">        Logger logger;</span><br><span class="line">        factory = (LoggerFactory) XMLUtil.getBean();</span><br><span class="line">        logger = factory.createLogger();</span><br><span class="line">        logger.writeLog();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-工厂方法模式总结"><a href="#2-4-工厂方法模式总结" class="headerlink" title="2.4 工厂方法模式总结"></a>2.4 工厂方法模式总结</h3><h4 id="2-4-1-优点"><a href="#2-4-1-优点" class="headerlink" title="2.4.1 优点"></a>2.4.1 优点</h4><ul>
+<li>在工厂方法模式中，工厂方法用来创建客户所需要的产品，同时还向客户隐藏了哪种具体产品类将被实例化这一细节，用户只需要关心所需产品对应的工厂，无须关心创建细节，甚至无须知道具体产品类的类名。</li>
+<li>基于工厂角色和产品角色的多态性设计是工厂方法模式的关键。它能够让工厂可以自主确定创建何种产品对象，而如何创建这个对象的细节则完全封装在具体工厂内部。工厂方法模式之所以又被称为多态工厂模式，就正是因为所有的具体工厂类都具有同一抽象父类。</li>
+<li>使用工厂方法模式的另一个优点是在系统中加入新产品时，无须修改抽象工厂和抽象产品提供的接口，无须修改客户端，也无须修改其他的具体工厂和具体产品，而只要添加一个具体工厂和具体产品就可以了，这样，系统的可扩展性也就变得非常好，完全符合“开闭原则”。</li>
+</ul>
+<h4 id="2-4-2-缺点"><a href="#2-4-2-缺点" class="headerlink" title="2.4.2 缺点"></a>2.4.2 缺点</h4><ul>
+<li>在添加新产品时，需要编写新的具体产品类，而且还要提供与之对应的具体工厂类，系统中类的个数将成对增加，在一定程度上增加了系统的复杂度，有更多的类需要编译和运行，会给系统带来一些额外的开销。</li>
+<li>由于考虑到系统的可扩展性，需要引入抽象层，在客户端代码中均使用抽象层进行定义，增加了系统的抽象性和理解难度，且在实现时可能需要用到DOM、反射等技术，增加了系统的实现难度。</li>
+</ul>
+<h4 id="2-4-3-适用场景"><a href="#2-4-3-适用场景" class="headerlink" title="2.4.3 适用场景"></a>2.4.3 适用场景</h4><ul>
+<li>客户端不知道它所需要的对象的类。在工厂方法模式中，客户端不需要知道具体产品类的类名，只需要知道所对应的工厂即可，具体的产品对象由具体工厂类创建，可将具体工厂类的类名存储在配置文件或数据库中。</li>
+<li>抽象工厂类通过其子类来指定创建哪个对象。在工厂方法模式中，对于抽象工厂类只需要提供一个创建产品的接口，而由其子类来确定具体要创建的对象，利用面向对象的多态性和里氏代换原则，在程序运行时，子类对象将覆盖父类对象，从而使得系统更容易扩展。</li>
+</ul>
+<h2 id="3-抽象工厂模式"><a href="#3-抽象工厂模式" class="headerlink" title="3. 抽象工厂模式"></a>3. 抽象工厂模式</h2><ul>
+<li>抽象工厂模式为创建一组对象提供了一种解决方案。与工厂方法模式相比，抽象工厂模式中的具体工厂不只是创建一种产品，它负责创建一族产品。</li>
+</ul>
+<h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><ul>
+<li><strong>抽象工厂模式(Abstract Factory Pattern)：</strong>提供一个创建一系列相关或相互依赖对象的接口，而无须指定它们具体的类。抽象工厂模式又称为Kit模式，它是一种对象创建型模式。</li>
+</ul>
+<h3 id="3-2-抽象工厂模式总结"><a href="#3-2-抽象工厂模式总结" class="headerlink" title="3.2 抽象工厂模式总结"></a>3.2 抽象工厂模式总结</h3><h4 id="3-2-1-优点"><a href="#3-2-1-优点" class="headerlink" title="3.2.1 优点"></a>3.2.1 优点</h4><ul>
+<li>抽象工厂模式隔离了具体类的生成，使得客户并不需要知道什么被创建。由于这种隔离，更换一个具体工厂就变得相对容易，所有的具体工厂都实现了抽象工厂中定义的那些公共接口，因此只需改变具体工厂的实例，就可以在某种程度上改变整个软件系统的行为。</li>
+<li>当一个产品族中的多个对象被设计成一起工作时，它能够保证客户端始终只使用同一个产品族中的对象。</li>
+<li>增加新的产品族很方便，无须修改已有系统，符合“开闭原则”。</li>
+</ul>
+<h4 id="3-2-2-缺点"><a href="#3-2-2-缺点" class="headerlink" title="3.2.2 缺点"></a>3.2.2 缺点</h4><ul>
+<li>增加新的产品等级结构麻烦，需要对原有系统进行较大的修改，甚至需要修改抽象层代码，这显然会带来较大的不便，违背了“开闭原则”。</li>
+</ul>
+<h4 id="3-2-3-适用场景"><a href="#3-2-3-适用场景" class="headerlink" title="3.2.3 适用场景"></a>3.2.3 适用场景</h4><ul>
+<li>一个系统不应当依赖于产品类实例如何被创建、组合和表达的细节，这对于所有类型的工厂模式都是很重要的，用户无须关心对象的创建过程，将对象的创建和使用解耦。</li>
+<li>系统中有多于一个的产品族，而每次只使用其中某一产品族。可以通过配置文件等方式来使得用户可以动态改变产品族，也可以很方便地增加新的产品族。</li>
+</ul>
+
       
     </div>
     <footer class="article-footer">
@@ -124,7 +170,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/08/16/factory-method/" data-id="cjl0p5q810000w4y56r6r13kd" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/08/16/factory-method/" data-id="cjl113hl700005gy572yt9y6o" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -218,7 +264,7 @@
         <h3 class="widget-title">Tag Cloud</h3>
         <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a>
+                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
             </canvas>
         </div>
     </div>
@@ -228,7 +274,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
