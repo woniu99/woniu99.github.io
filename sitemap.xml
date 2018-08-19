@@ -2,23 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/2018/08/17/hello-world/</loc>
+    <loc>http://yoursite.com/2018/06/01/hello-world/</loc>
     
-    <lastmod>2018-08-18T18:14:48.214Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/08/18/proxy/</loc>
-    
-    <lastmod>2018-08-18T18:07:36.376Z</lastmod>
+    <lastmod>2018-08-19T08:20:47.805Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/08/19/jdk-proxy/</loc>
+    <loc>http://yoursite.com/2018/08/16/factory-method/</loc>
     
-    <lastmod>2018-08-18T18:06:40.641Z</lastmod>
+    <lastmod>2018-08-19T07:59:02.552Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/15/factory/</loc>
+    
+    <lastmod>2018-08-19T07:41:42.780Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/17/proxy/</loc>
+    
+    <lastmod>2018-08-19T06:40:30.756Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/18/jdk-proxy/</loc>
+    
+    <lastmod>2018-08-19T06:40:21.356Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2018/08/19/cglib-proxy/</loc>
+    
+    <lastmod>2018-08-19T06:34:51.450Z</lastmod>
     
   </url>
   

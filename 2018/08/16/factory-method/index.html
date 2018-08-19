@@ -5,16 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
-  <title>Tag: 设计模式 | Snail99 Blog</title>
+  <title>设计模式之--工厂模式(二) | Snail99 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java Javascript 心理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Snail99 Blog">
-<meta property="og:url" content="http://yoursite.com/tags/设计模式/index.html">
+  <meta name="description" content="2.工厂方法模式2.1 定义 工厂方法模式(Factory Method Pattern)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Patte">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之--工厂模式(二)">
+<meta property="og:url" content="http://yoursite.com/2018/08/16/factory-method/index.html">
 <meta property="og:site_name" content="Snail99 Blog">
+<meta property="og:description" content="2.工厂方法模式2.1 定义 工厂方法模式(Factory Method Pattern)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Patte">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://on-img.com/chart_image/5b792108e4b0be50eae546ba.png">
+<meta property="og:updated_time" content="2018-08-19T07:59:02.552Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Snail99 Blog">
+<meta name="twitter:title" content="设计模式之--工厂模式(二)">
+<meta name="twitter:description" content="2.工厂方法模式2.1 定义 工厂方法模式(Factory Method Pattern)：定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Patte">
+<meta name="twitter:image" content="http://on-img.com/chart_image/5b792108e4b0be50eae546ba.png">
   
     <link rel="alternative" href="/atom.xml" title="Snail99 Blog" type="application/atom+xml">
   
@@ -80,116 +86,96 @@
 </header>
 
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/19/cglib-proxy/" class="archive-article-date">
-  <time datetime="2018-08-19T04:05:22.000Z" itemprop="datePublished">Aug 19</time>
+      <section id="main"><article id="post-factory-method" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/08/16/factory-method/" class="article-date">
+  <time datetime="2018-08-16T07:42:47.000Z" itemprop="datePublished">2018-08-16</time>
 </h3>
-      
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/19/cglib-proxy/">设计模式之--代理模式(三)</a>
+    <h1 class="article-title" itemprop="name">
+      设计模式之--工厂模式(二)
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/18/jdk-proxy/" class="archive-article-date">
-  <time datetime="2018-08-17T16:11:46.000Z" itemprop="datePublished">Aug 18</time>
-</h3>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/18/jdk-proxy/">设计模式之--代理模式(二)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/17/proxy/" class="archive-article-date">
-  <time datetime="2018-08-17T11:23:13.000Z" itemprop="datePublished">Aug 17</time>
-</h3>
+        
+        <h2 id="2-工厂方法模式"><a href="#2-工厂方法模式" class="headerlink" title="2.工厂方法模式"></a>2.工厂方法模式</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><ul>
+<li><strong>工厂方法模式(Factory Method Pattern)：</strong>定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Pattern)。</li>
+</ul>
+<a id="more"></a>
+<h3 id="2-2-模型结构图"><a href="#2-2-模型结构图" class="headerlink" title="2.2 模型结构图"></a>2.2 模型结构图</h3><p><img src="http://on-img.com/chart_image/5b792108e4b0be50eae546ba.png" alt="图1.2 工厂方法模式结构图"></p>
+<h3 id="2-3-代码示例"><a href="#2-3-代码示例" class="headerlink" title="2.3 代码示例"></a>2.3 代码示例</h3><h4 id="2-3-1"><a href="#2-3-1" class="headerlink" title="2.3.1"></a>2.3.1</h4>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/17/proxy/">设计模式之--代理模式(一)</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 
-    </header>
+        <a data-url="http://yoursite.com/2018/08/16/factory-method/" data-id="cjl0nsgk70000hsy5rdvud0c8" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
   </div>
-</article>
+  </div>
+  </div>
   
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/16/factory-method/" class="archive-article-date">
-  <time datetime="2018-08-16T07:42:47.000Z" itemprop="datePublished">Aug 16</time>
-</h3>
-      
+<nav id="article-nav">
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/16/factory-method/">设计模式之--工厂模式(二)</a>
-    </h1>
+    <a href="/2018/08/17/proxy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          设计模式之--代理模式(一)
+        
+      </div>
+    </a>
   
+  
+    <a href="/2018/08/15/factory/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式之--工厂模式(一)</div>
+    </a>
+  
+</nav>
 
-    </header>
-  </div>
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/15/factory/" class="archive-article-date">
-  <time datetime="2018-08-15T06:39:59.000Z" itemprop="datePublished">Aug 15</time>
-</h3>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/15/factory/">设计模式之--工厂模式(一)</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-  
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTAzMC8xNTU1Nw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->  
+
 </section>
       
       <aside id="sidebar">
