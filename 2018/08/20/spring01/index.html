@@ -1,0 +1,368 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>Spring源码学习(一) | Snail99 Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring源码学习– IOC1. 定义 IOC(Inversion of Control)控制反转: 控制反转就是把原先我们代码里面需要实现的对象创建,依赖的代码,反转给容器来帮忙实现.那么必然的我们需要创建一个容器,同时需要一种描述来让容器知道需要创建的对象与对象之间的关系.这个描述最具体的表现就是我们可配置的文件. DI(Dependency Injection)依赖注入: 就是指对象是被动">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring源码学习(一)">
+<meta property="og:url" content="http://yoursite.com/2018/08/20/spring01/index.html">
+<meta property="og:site_name" content="Snail99 Blog">
+<meta property="og:description" content="Spring源码学习– IOC1. 定义 IOC(Inversion of Control)控制反转: 控制反转就是把原先我们代码里面需要实现的对象创建,依赖的代码,反转给容器来帮忙实现.那么必然的我们需要创建一个容器,同时需要一种描述来让容器知道需要创建的对象与对象之间的关系.这个描述最具体的表现就是我们可配置的文件. DI(Dependency Injection)依赖注入: 就是指对象是被动">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/BeanFactory.png">
+<meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/BeanDefinition.png">
+<meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/ClassPathXmlApplicationContext.png">
+<meta property="og:updated_time" content="2018-08-23T13:05:11.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring源码学习(一)">
+<meta name="twitter:description" content="Spring源码学习– IOC1. 定义 IOC(Inversion of Control)控制反转: 控制反转就是把原先我们代码里面需要实现的对象创建,依赖的代码,反转给容器来帮忙实现.那么必然的我们需要创建一个容器,同时需要一种描述来让容器知道需要创建的对象与对象之间的关系.这个描述最具体的表现就是我们可配置的文件. DI(Dependency Injection)依赖注入: 就是指对象是被动">
+<meta name="twitter:image" content="http://pdwm7er91.bkt.clouddn.com/BeanFactory.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Snail99 Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mystyle.css">
+  
+    <link rel="stylesheet" href="/css/fonts.googleapis.com.css">
+  
+  <!--[if lt IE 9]><script src="/js/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/woniu99"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">Snail99&#39;s Blog</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">Snail</li>
+        <li class="cara cara-bg1"><svg t="1534588089978" class="icon" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1212 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2573" id="mx_n_1534588089982"><path d="M700.021726 713.073395c-18.333171-68.462888-2.90498-132.34786 46.284575-191.654917 49.18341-59.299375 116.194576-97.621756 201.045789-114.964069C917.45584 305.221016 859.847836 222.300823 774.534222 157.690758c-85.313613-64.611601-182.45607-96.913561-291.436588-96.913561-26.043426 0-52.086853 2.172206-78.124135 6.522762-26.044963 4.350556-50.864027 10.38173-74.471019 18.098131-23.600847 7.711791-46.501181 17.354603-68.685639 28.923827-22.178313 11.569223-43.391885 24.591705-63.633033 39.065908-20.241148 14.468058-39.047473 30.622879-56.418975 48.456781-17.373038 17.833902-33.280528 36.635618-47.719398 56.418975-14.437334 19.778748-27.687175 40.74038-39.755668 62.895651-12.060812 22.15527-21.950954 45.047923-29.667354 68.685639-7.711791 23.631571-13.742965 48.456781-18.093522 74.463338-4.350556 26.014238-6.528907 52.05152-6.528907 78.125671 0 52.080708 8.19109 102.697405 24.579415 151.851626 16.38218 49.152685 39.522163 93.504704 69.424558 133.0622 29.89625 39.557496 64.60392 74.019372 104.132228 103.393309 39.526772 29.375473 83.87879 52.268126 133.0622 68.679494 49.18341 16.419049 99.800106 24.610139 151.851626 24.579415 73.275845 0 141.744878-15.180861 205.396346-45.539511 63.656076-30.364795 118.131741-72.063773 163.426995-125.10615C769.919437 829.261826 719.308885 782.496417 700.021726 713.073395L700.021726 713.073395zM483.050012 731.910444c-52.082244 0-96.686202-18.560531-133.801118-55.675448-37.121062-37.121062-55.681592-81.726555-55.681592-133.807263 0-34.709206 8.436884-66.536477 25.316798-95.478738 16.88145-28.942261 40.019896-51.841059 69.424558-68.685639 29.404661-16.84458 60.986137-25.281465 94.741355-25.318334 53.040841 0 98.119489 18.560531 135.24055 55.681592 37.114917 37.116453 55.675448 81.72041 55.675448 133.801118 0 34.709206-8.436884 66.538013-25.316798 95.478738-16.88145 28.942261-40.019896 51.841059-69.424558 68.685639C549.821529 723.436691 517.763827 731.87972 483.050012 731.910444L483.050012 731.910444zM1211.995579 218.454145c-13.51407-26.997415-27.988273-51.816479-43.416464-74.463338-15.428192-22.646859-31.102177-41.207389-47.023493-55.681592-15.91978-14.474203-32.068456-27.244745-48.456781-38.322381-16.38218-11.077635-32.28967-19.514519-47.711717-25.316798-15.428192-5.802278-30.129754-10.633669-44.112369-14.486493-13.97647-3.852823-26.745476-6.031174-38.320844-6.528907-11.57076-0.491588-21.686725-0.737382-30.35865-0.737382-8.670389 0.006145-15.428192 0.479299-20.270336 1.433287l-7.218667 0L809.891711-1.5e-05c42.425607 54.9565 79.065833 107.024918 109.922217 156.208328 30.856383 49.177265 54.475665 91.128181 70.857845 125.837388 16.38218 34.715351 29.632021 65.817529 39.755668 93.306532 10.123647 27.49054 16.154821 50.874781 18.091986 70.16194 1.944846 19.28716 2.671475 33.988722 2.178351 44.106224-0.491588 10.117502-1.697516 18.560531-3.611638 25.316798-38.568175-19.285624-81.466935-22.663757-128.705498-10.1344-44.370453 12.529357-78.84001 36.148638-103.394846 70.857845-24.560981 34.709206-32.026978 69.897712-22.401064 105.567051 9.625913 35.667804 33.490989 61.946271 71.595227 78.820039 38.105774 16.875305 79.331598 19.053655 123.665182 6.522762 22.185995-6.756267 42.444041-16.640264 60.771068-29.661209 18.327026-13.022481 33.028589-27.724044 44.106224-44.106224 11.077635-16.388325 18.542096-34.217618 22.401064-53.503242 51.097531-78.094947 25.054105-216.463227-78.125671-415.107915l-52.068418-92.563005L1211.995579 218.454145zM483.050012 439.728793c-18.327026 0-35.435835 4.585597-51.324891 13.74911-15.890592 9.163513-28.432238 21.70516-37.632621 37.631084-9.192701 15.91978-13.776762 33.028589-13.741429 51.324891 0 27.951404 10.117502 52.06381 30.35865 72.340291 20.241148 20.270336 44.585523 30.387838 73.036196 30.357114 28.444528-0.029188 52.555398-10.152835 72.334146-30.357114 19.778748-20.210424 29.667354-44.328975 29.667354-72.340291 0-28.017461-9.888606-52.129867-29.667354-72.340291C536.307459 449.883163 511.961549 439.765662 483.050012 439.728793L483.050012 439.728793zM483.050012 439.728793" p-id="2574" data-spm-anchor-id="a313x.7781069.0.i0"></path></svg></li>
+        <li class="cara">L</li>
+        <li class="cara">O</li>
+        <li class="cara">V</li>
+        <li class="cara">E</li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">首页</a>
+      
+        <a class="main-nav-link" href="/archives">归档</a>
+      
+        <a class="main-nav-link" href="/about">关于</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-spring01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/08/20/spring01/" class="article-date">
+  <time datetime="2018-08-20T07:45:39.000Z" itemprop="datePublished">2018-08-20</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring源码学习(一)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h1 id="Spring源码学习–-IOC"><a href="#Spring源码学习–-IOC" class="headerlink" title="Spring源码学习– IOC"></a>Spring源码学习– IOC</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><ul>
+<li><strong>IOC(Inversion of Control)控制反转:</strong> 控制反转就是把原先我们代码里面需要实现的对象创建,依赖的代码,反转给容器来帮忙实现.那么必然的我们需要创建一个容器,同时需要一种描述来让容器知道需要创建的对象与对象之间的关系.这个描述最具体的表现就是我们可配置的文件.</li>
+<li><strong>DI(Dependency Injection)依赖注入:</strong> 就是指对象是被动接受依赖类而不是自己去找,换句话说就是指对象不是从容器中查找它的依赖类,而是在容器实例化对象的时候主动将它依赖的类注入给它.</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-Spring-IOC-体系结构"><a href="#2-Spring-IOC-体系结构" class="headerlink" title="2. Spring IOC 体系结构"></a>2. Spring IOC 体系结构</h2><h3 id="2-1-BeanFactory"><a href="#2-1-BeanFactory" class="headerlink" title="2.1 BeanFactory"></a>2.1 BeanFactory</h3><ul>
+<li>Spring Bean 的创建是典型的工厂模式，这一系列的 Bean 工厂，也即 IOC 容器为开发者管理对象间的依赖关系提供了很多便利和基础服务，在 Spring 中有许多的 IOC 容器的实现供用户选择和使用，其相互关系如下：</li>
+</ul>
+<p><img src="http://pdwm7er91.bkt.clouddn.com/BeanFactory.png" alt="图1.1 Bean创建类关系图"></p>
+<ul>
+<li>其中 <code>BeanFactory</code> 作为最顶层的一个接口类，它定义了 IOC 容器的基本功能规范，<code>BeanFactory</code> 有三个子类：<code>ListableBeanFactory</code>、<code>HierarchicalBeanFactory</code> 和 <code>AutowireCapableBeanFactory</code>。但是从上图中我们可以发现最终的默认实现类是 <strong><code>DefaultListableBeanFactory</code></strong>，他实现了所有的接口。</li>
+<li>其中<code>ListableBeanFactory</code> 接口表示这些 Bean 是可列表的，而<code>HierarchicalBeanFactory</code> 表示的是这些 Bean 是有继承关系的，也就是每个 Bean 有可能有父 Bean。<code>AutowireCapableBeanFactory</code> 接口定义 Bean 的自动装配规则。这四个接口共同定义了 Bean 的集合、Bean 之间的关系、以及 Bean 行为.</li>
+</ul>
+<h4 id="2-1-1-BeanFactory-java中的方法"><a href="#2-1-1-BeanFactory-java中的方法" class="headerlink" title="2.1.1 BeanFactory.java中的方法"></a>2.1.1 BeanFactory.java中的方法</h4><ul>
+<li>BeanFactory 作为最基本的 IOC 容器接口,它的方法如下:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BeanFactory</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 对 FactoryBean 的转义定义,因为如果使用 Bean 的名字检索 Factory 得到的对象是工厂生成的对象,</span></span><br><span class="line">    <span class="comment">// 如果需要得到工厂本身,需要转义</span></span><br><span class="line">    String FACTORY_BEAN_PREFIX = <span class="string">"&amp;"</span>;</span><br><span class="line">    <span class="comment">// 根据 bean 的名字,获取在 IOC 容器中得到 bean 实例</span></span><br><span class="line">    <span class="function">Object <span class="title">getBean</span><span class="params">(String name)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">    <span class="comment">// 根据 class 的类型获取 bean 的实例</span></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">    <span class="comment">//根据 bean 的名字和 Class 类型来得到 bean 实例，增加了类型安全验证机制。</span></span><br><span class="line">    &lt;T&gt; <span class="function">T <span class="title">getBean</span><span class="params">(String name, Class&lt;T&gt; requiredType)</span> <span class="keyword">throws</span> BeansException</span>;</span><br><span class="line">    <span class="comment">//提供对 bean 的检索，看看是否在 IOC 容器有这个名字的 bean</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">containsBean</span><span class="params">(String name)</span></span>;</span><br><span class="line">    <span class="comment">// 根据 bean 名字得到 bean 实例，并同时判断这个 bean 是不是单例</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isSingleton</span><span class="params">(String name)</span> <span class="keyword">throws</span> NoSuchBeanDefinitionException</span>;</span><br><span class="line">    <span class="comment">// 得到 bean 的别名，如果根据别名检索，那么其原名也会被检索出来</span></span><br><span class="line">    String[] getAliases(String name);</span><br><span class="line">    <span class="comment">//得到 bean 实例的 Class 类型</span></span><br><span class="line">    Class&lt;?&gt; getType(String name) <span class="keyword">throws</span> NoSuchBeanDefinitionException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在 BeanFactory 里只对 IOC 容器的基本行为作了定义，根本不关心你的 bean 是如何定义怎样加载的。正如我们只关心工厂里得到什么的产品对象，至于工厂是怎么生产这些对象的，这个基本的接口不关心。</li>
+<li><strong>ApplicationContext</strong> 是 Spring 提供的一个高级的 IOC 容器实现，它除了能够提供 IOC 容器的基本功能外，还为用户提供了以下的附加服务:<ol>
+<li>支持信息源，可以实现国际化。（实现 MessageSource 接口）</li>
+<li>访问资源。(实现 ResourcePatternResolver 接口，这个后面要讲)</li>
+<li>支持应用事件。(实现 ApplicationEventPublisher 接口)</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2-BeanDefinition"><a href="#2-2-BeanDefinition" class="headerlink" title="2.2 BeanDefinition"></a>2.2 BeanDefinition</h3><ul>
+<li>SpringIOC 容器管理了我们定义的各种 Bean 对象及其相互的关系，Bean 对象在 Spring 实现中是以<code>BeanDefinition</code> 来描述的，其继承体系如下：</li>
+</ul>
+<p><img src="http://pdwm7er91.bkt.clouddn.com/BeanDefinition.png" alt="图1.2 BeanDefinition体系结构图"></p>
+<ul>
+<li>Bean 的解析主要就是对 Spring 配置文件的解析。</li>
+</ul>
+<h2 id="3-IOC-容器的初始化"><a href="#3-IOC-容器的初始化" class="headerlink" title="3. IOC 容器的初始化"></a>3. IOC 容器的初始化</h2><ul>
+<li>IOC 容器的初始化包括 BeanDefinition 的 Resource <strong>定位、载入、注册</strong>这三个基本的过程。我们以ApplicationContext 为例讲解，ApplicationContext 系列容器也许是我们最熟悉的，因为 web 项目中使用的 XmlWebApplicationContext 就属于这个继承体系，还有 ClasspathXmlApplicationContext 等，其继承体系如下图所示：</li>
+</ul>
+<p><img src="http://pdwm7er91.bkt.clouddn.com/ClassPathXmlApplicationContext.png" alt="图1.3 ClassPathXmlApplicationContext 继承体系图"></p>
+<ul>
+<li>下面我们分析下的 <strong>ClassPathXmlApplicationContext</strong> 容器<strong>创建</strong>过程:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext ac = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="3-1-调用构造函数"><a href="#3-1-调用构造函数" class="headerlink" title="3.1. 调用构造函数"></a>3.1. 调用构造函数</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassPathXmlApplicationContext</span><span class="params">(String configLocation)</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>(<span class="keyword">new</span> String[] &#123;configLocation&#125;, <span class="keyword">true</span>, <span class="keyword">null</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>实际上调用的是:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ClassPathXmlApplicationContext</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    String[] configLocations, <span class="keyword">boolean</span> refresh, @Nullable ApplicationContext parent)</span></span></span><br><span class="line"><span class="function">    <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(parent);</span><br><span class="line">        setConfigLocations(configLocations);</span><br><span class="line">        <span class="keyword">if</span> (refresh) &#123;</span><br><span class="line">            refresh();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-2-设置资源加载器和资源定位"><a href="#3-2-设置资源加载器和资源定位" class="headerlink" title="3.2. 设置资源加载器和资源定位"></a>3.2. 设置资源加载器和资源定位</h3><ol>
+<li><strong>调用父类容器的构造方法(<code>super(parent)</code>方法)为容器设置好 Bean 资源加载器。</strong></li>
+</ol>
+<ul>
+<li>从<strong><code>super(parent)</code></strong>方法往上一级找,直到 <strong>AbstractApplicationContext</strong> 的源码可以看到做了如下工作:</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractApplicationContext</span> <span class="keyword">extends</span> <span class="title">DefaultResourceLoader</span></span></span><br><span class="line"><span class="class">        <span class="keyword">implements</span> <span class="title">ConfigurableApplicationContext</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        <span class="comment">// 为了避免应用程序在 Weblogic8.1 关闭时出现类加载异常加载问题，加载 IoC 容</span></span><br><span class="line">        <span class="comment">// 器关闭事件(ContextClosedEvent)类</span></span><br><span class="line">        ContextClosedEvent.class.getName();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AbstractApplicationContext</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 获取一个 Spring Source 的加载器用于读入 Spring Bean 定义资源文件</span></span><br><span class="line">        <span class="comment">// Spring 资源加载器，其 getResource(String location)方法用于载入资源</span></span><br><span class="line">        <span class="keyword">this</span>.resourcePatternResolver = getResourcePatternResolver();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AbstractApplicationContext</span><span class="params">(@Nullable ApplicationContext parent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>();</span><br><span class="line">        setParent(parent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>调用父类 AbstractRefreshableConfigApplicationContext 的 setConfigLocations(configLocations)方法设置 Bean 定义资源文件的定位路径:</strong></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConfigLocations</span><span class="params">(@Nullable String... locations)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (locations != <span class="keyword">null</span>) &#123;</span><br><span class="line">        Assert.noNullElements(locations, <span class="string">"Config locations must not be null"</span>);</span><br><span class="line">        <span class="keyword">this</span>.configLocations = <span class="keyword">new</span> String[locations.length];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; locations.length; i++) &#123;</span><br><span class="line">            <span class="comment">// resolvePath 为同一个类中将字符串解析为路径的方法</span></span><br><span class="line">            <span class="keyword">this</span>.configLocations[i] = resolvePath(locations[i]).trim();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.configLocations = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><strong>AbstractApplicationContext 的 refresh 函数载入 Bean 定义过程：</strong></li>
+</ol>
+<ul>
+<li>Spring IOC 容器对 Bean 定义资源的载入是从 refresh()函数开始的，refresh()是一个模板方法，refresh()方法的作用是：在创建 IOC 容器前，如果已经有容器存在，则需要把已有的容器销毁和关闭，以保证在 refresh 之后使用的是新建立起来的 IOC 容器。refresh 的作用类似于对 IOC 容器的重启，在新建立好的容器中对容器进行初始化，对 Bean 定义资源进行载入.</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">refresh</span><span class="params">()</span> <span class="keyword">throws</span> BeansException, IllegalStateException </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>.startupShutdownMonitor) &#123;</span><br><span class="line">    <span class="comment">//告诉子类启动 refreshBeanFactory()方法，</span></span><br><span class="line">    <span class="comment">// Bean 定义资源文件的载入从子类的 refreshBeanFactory()方法启动</span></span><br><span class="line">    ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();</span><br><span class="line">    prepareBeanFactory(beanFactory);</span><br><span class="line">    ......</span><br><span class="line"><span class="function"><span class="keyword">protected</span> ConfigurableListableBeanFactory <span class="title">obtainFreshBeanFactory</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    refreshBeanFactory(); <span class="comment">// 是个抽象方法,在子类中实现</span></span><br><span class="line">    <span class="keyword">return</span> getBeanFactory();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ConfigurableListableBeanFactory.java</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">refreshBeanFactory</span><span class="params">()</span> <span class="keyword">throws</span> BeansException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hasBeanFactory()) &#123; &#123;<span class="comment">//如果已经有容器，销毁容器中的 bean，关闭容器</span></span><br><span class="line">        destroyBeans();</span><br><span class="line">        closeBeanFactory();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//创建 IOC 容器</span></span><br><span class="line">        DefaultListableBeanFactory beanFactory = createBeanFactory();</span><br><span class="line">        beanFactory.setSerializationId(getId());</span><br><span class="line">        customizeBeanFactory(beanFactory);</span><br><span class="line">        <span class="comment">// 调用载入 Bean 定义的方法，主要这里又使用了一个委派模式</span></span><br><span class="line">        <span class="comment">// 在当前类中只定义了抽象的 loadBeanDefinitions方法，具体的实现调用子类容器</span></span><br><span class="line">        loadBeanDefinitions(beanFactory);</span><br><span class="line">        <span class="keyword">synchronized</span> (<span class="keyword">this</span>.beanFactoryMonitor) &#123;</span><br><span class="line">            <span class="keyword">this</span>.beanFactory = beanFactory;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">   ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>AbstractXmlApplicationContext.java(子类)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">loadBeanDefinitions</span><span class="params">(DefaultListableBeanFactory beanFactory)</span> </span></span><br><span class="line"><span class="function">        <span class="keyword">throws</span>  BeansException, IOException </span>&#123;</span><br><span class="line">    <span class="comment">// 创建 XmlBeanDefinitionReader，即创建 Bean 读取器，并通过回调设置到容器中去，</span></span><br><span class="line">    <span class="comment">// 容器使用该读取器读取 Bean 定义资源</span></span><br><span class="line">    XmlBeanDefinitionReader beanDefinitionReader = <span class="keyword">new</span> XmlBeanDefinitionReader(beanFactory);</span><br><span class="line">    <span class="comment">// 为 Bean 读取器设置 Spring 资源加载器</span></span><br><span class="line">    beanDefinitionReader.setEnvironment(<span class="keyword">this</span>.getEnvironment());</span><br><span class="line">    beanDefinitionReader.setResourceLoader(<span class="keyword">this</span>);</span><br><span class="line">    beanDefinitionReader.setEntityResolver(<span class="keyword">new</span> ResourceEntityResolver(<span class="keyword">this</span>));</span><br><span class="line">    initBeanDefinitionReader(beanDefinitionReader);</span><br><span class="line">    <span class="comment">//Bean 读取器真正实现加载的方法</span></span><br><span class="line">    loadBeanDefinitions(beanDefinitionReader);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>再往里这里就不写了,自己研究吧QAQ</p>
+</blockquote>
+<h2 id="4-总结-IOC-初始化过程"><a href="#4-总结-IOC-初始化过程" class="headerlink" title="4. 总结 IOC 初始化过程"></a>4. 总结 IOC 初始化过程</h2><ol>
+<li><strong>初始化的入口在容器实现中的 refresh()调用来完成</strong></li>
+<li><p><strong>对 bean 定义载入 IOC 容器使用的方法是 loadBeanDefinition, 其中的大致过程如下：</strong></p>
+<ul>
+<li><strong><em>通过ResourceLoader 来完成资源文件位置的<code>定位</code>，DefaultResourceLoader 是默认的实现</em></strong>，同时上下文本身就给了ResourceLoader 的实现，可以从类路径，文件系统,URL 等方式来定为资源位置。</li>
+<li>如果是 XmlBeanFactory 作为 IOC 容器，那么需要为它指定 bean 定义的资源，也就是说bean 定义文件时通过抽象成 Resource 来被 IOC 容器处理的，容器通过 BeanDefinitionReader 来完成定义信息的解析和 Bean 信息的注册,往往使用的是 XmlBeanDefinitionReader 来解析 bean 的 xml 定义文件</li>
+<li>实际的处理过程是委托给BeanDefinitionParserDelegate来完成的，从而得到bean的定义信息，这些信息在 Spring 中使用BeanDefinition 对象来表示<blockquote>
+<p>loadBeanDefinition, RegisterBeanDefinition 这些相关方法-他们都是为处理 BeanDefinitin 服务的.</p>
+</blockquote>
+</li>
+<li>容器解析得到 BeanDefinitionIoC 以后，需要把它在 IOC 容器中<code>注册</code>，这由 IOC 实现 BeanDefinitionRegistry 接口来实现。<strong><em>注册过程就是在 IOC 容器内部维护的一个HashMap 来保存得到的 BeanDefinition 的过程</em></strong>。这个 HashMap 是 IOC 容器持有 bean 信息的场所，以后对bean 的操作都是围绕这个 HashMap 来实现的.</li>
+</ul>
+</li>
+<li><p>然后我们就可以通过 BeanFactory 和 ApplicationContext 来享受到 SpringIOC 的服务了,在使用 IOC容器的时候，我们注意到除了少量粘合代码，绝大多数以正确 IOC 风格编写的应用程序代码完全不用关心如何到达工厂，因为容器将把这些对象与容器管理的其他对象钩在一起。基本的策略是把工厂放到已知的地方，最好是放在对预期使用的上下文有意义的地方，以及代码将实际需要访问工厂的地方。Spring本身提供了对声明式载入 web 应用程序用法的应用程序上下文,并将其存储在 ServletContext 中的框架实现。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+        <a data-url="http://yoursite.com/2018/08/20/spring01/" data-id="cjl6l2a6v000ctcy5a4dwyjj8" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/19/cglib-proxy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式之--代理模式(三)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTAzMC8xNTU1Nw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->  
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/20/spring01/">Spring源码学习(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/19/cglib-proxy/">设计模式之--代理模式(三)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/18/jdk-proxy/">设计模式之--代理模式(二)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/17/proxy/">设计模式之--代理模式(一)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/16/factory-method/">设计模式之--工厂模式(二)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/java/" style="font-size: 15px;">java</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+            </canvas>
+        </div>
+    </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Snail99<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
