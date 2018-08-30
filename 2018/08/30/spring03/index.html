@@ -5,16 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   
-  <title>Tag: Spring | Snail99 Blog</title>
+  <title>Spring源码学习(三)--AOP | Snail99 Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java Javascript 心理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Snail99 Blog">
-<meta property="og:url" content="http://yoursite.com/tags/Spring/index.html">
+  <meta name="description" content="Spring AOP 基础1. 概念 AOP 是 OOP 的延续，是 Aspect Oriented Programming 的缩写，意思是面向切面编程。可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。AOP 设计模式孜孜不倦追求的是调用者和被调用者之间的解耦，AOP 可以说也是这种目标的一种实现。">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring源码学习(三)--AOP">
+<meta property="og:url" content="http://yoursite.com/2018/08/30/spring03/index.html">
 <meta property="og:site_name" content="Snail99 Blog">
+<meta property="og:description" content="Spring AOP 基础1. 概念 AOP 是 OOP 的延续，是 Aspect Oriented Programming 的缩写，意思是面向切面编程。可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。AOP 设计模式孜孜不倦追求的是调用者和被调用者之间的解耦，AOP 可以说也是这种目标的一种实现。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-30T07:35:28.944Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Snail99 Blog">
+<meta name="twitter:title" content="Spring源码学习(三)--AOP">
+<meta name="twitter:description" content="Spring AOP 基础1. 概念 AOP 是 OOP 的延续，是 Aspect Oriented Programming 的缩写，意思是面向切面编程。可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。AOP 设计模式孜孜不倦追求的是调用者和被调用者之间的解耦，AOP 可以说也是这种目标的一种实现。">
   
     <link rel="alternative" href="/atom.xml" title="Snail99 Blog" type="application/atom+xml">
   
@@ -80,78 +84,119 @@
 </header>
 
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/30/spring03/" class="archive-article-date">
-  <time datetime="2018-08-30T07:01:54.000Z" itemprop="datePublished">Aug 30</time>
+      <section id="main"><article id="post-spring03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/08/30/spring03/" class="article-date">
+  <time datetime="2018-08-30T07:01:54.000Z" itemprop="datePublished">2018-08-30</time>
 </h3>
-      
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/30/spring03/">Spring源码学习(三)--AOP</a>
+    <h1 class="article-title" itemprop="name">
+      Spring源码学习(三)--AOP
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/21/spring02/" class="archive-article-date">
-  <time datetime="2018-08-21T13:09:45.000Z" itemprop="datePublished">Aug 21</time>
-</h3>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/21/spring02/">Spring源码学习(二)--DI</a>
-    </h1>
-  
+        
+        <h1 id="Spring-AOP-基础"><a href="#Spring-AOP-基础" class="headerlink" title="Spring AOP 基础"></a>Spring AOP 基础</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><blockquote>
+<p>AOP 是 OOP 的延续，是 Aspect Oriented Programming 的缩写，意思是<strong>面向切面编程</strong>。可以通过预编译方式和运行期动态代理实现在不修改源代码的情况下给程序动态统一添加功能的一种技术。AOP 设计模式孜孜不倦追求的是调用者和被调用者之间的解耦，AOP 可以说也是这种目标的一种实现。</p>
+</blockquote>
+<a id="more"></a>
+<ul>
+<li>我们现在做的一些非业务，如：日志、事务、安全等都会写在业务代码中(也即是说，这些非业务类横切于业务类)，但这些代码往往是重复，复制——粘贴式的代码会给程序的维护带来不便，AOP 就实现了把这些业务需求与系统需求分开来做。这种解决的方式也称代理机制。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Aspect(切面)</td>
+<td>官方的抽象定义为“一个关注点的模块化，这个关注点可能会横切多个对象”。“切面”在ApplicationContext 中<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>来配置。白话(就是一个<strong>类</strong>)</td>
+</tr>
+<tr>
+<td>Pointcut(切入点)</td>
+<td>进行规则匹配，不同的匹配，执行不同的内容。白话（<strong>匹配规则</strong>）</td>
+</tr>
+<tr>
+<td>Target Object(目标对象)</td>
+<td>被代理的对象</td>
+</tr>
+<tr>
+<td>JoinPoint(连接点)</td>
+<td>程序执行过程中的某一行为。白话（客户端调用的<strong>方法</strong>）</td>
+</tr>
+<tr>
+<td>Advice(通知)</td>
+<td>在连接点上触发的事件，从而可以在很多位置去执行额外的动作。如前置通知、后置通知、异常通知、环绕通知。白话（执行<strong>额外的方法</strong>）</td>
+</tr>
+</tbody>
+</table>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <h3 href="/2018/08/20/spring01/" class="archive-article-date">
-  <time datetime="2018-08-20T07:45:39.000Z" itemprop="datePublished">Aug 20</time>
-</h3>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/20/spring01/">Spring源码学习(一)--IOC</a>
-    </h1>
-  
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
 
-    </header>
+        <a data-url="http://yoursite.com/2018/08/30/spring03/" data-id="cjlgj1g05000hwoy5i5p7045c" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
   </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/30/mybatis01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mybatis学习系列(一)</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
-  
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTAzMC8xNTU1Nw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->  
+
 </section>
       
       <aside id="sidebar">
