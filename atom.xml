@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-08-30T07:35:28.944Z</updated>
+  <updated>2018-09-13T08:04:40.217Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>centos7学习(一)--centos7安装和配置</title>
+    <link href="http://yoursite.com/2018/09/13/contos01/"/>
+    <id>http://yoursite.com/2018/09/13/contos01/</id>
+    <published>2018-09-13T07:12:12.000Z</published>
+    <updated>2018-09-13T08:04:40.217Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="centos7安装和配置"><a href="#centos7安装和配置" class="headerlink" title="centos7安装和配置"></a>centos7安装和配置</h1><h2 id="1-前期准备"><a href="#1-前期准备" class="headerlink" title="1.前期准备"></a>1.前期准备</h2><h3 id="1-1-安装虚拟机"><a href="#1-1-安装虚拟机" class="headerlink" title="1.1 安装虚拟机"></a>1.1 安装虚拟机</h3><ul><li><a href="http://download3.vmware.com/software/wkst/file/VMware-workstation-full-14.1.3-9474260.exe" target="_blank" rel="noopener">VMware-workstation14下载地址:</a> <code>http://download3.vmware.com/software/wkst/file/VMware-workstation-full-14.1.3-9474260.exe</code></li><li>安装步骤”<strong>下一步</strong>“即可.</li></ul><a id="more"></a><h3 id="1-2-安装centos7"><a href="#1-2-安装centos7" class="headerlink" title="1.2 安装centos7"></a>1.2 安装centos7</h3><ul><li><a href="http://repo.virtualhosting.hk/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso" target="_blank" rel="noopener">centos7下载地址:</a> <code>http://repo.virtualhosting.hk/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1804.iso</code></li><li>安装步骤”<strong>下一步</strong>“即可.</li></ul><h2 id="2-查看虚拟机中centos7的IP"><a href="#2-查看虚拟机中centos7的IP" class="headerlink" title="2.查看虚拟机中centos7的IP"></a>2.查看虚拟机中centos7的IP</h2><ol><li>虚拟机中登录操作系统 用户名<code>root</code> 密码 <code>root</code>.</li><li>输入IP查询命令 : <code>ip addr</code>,如果发现 <code>ens33</code> 没有 <code>inet</code> 这个属性，那么就没法通过IP地址连接虚拟机.</li><li>查看ens33网卡的配置： <code>vi /etc/sysconfig/network-scripts/ifcfg-ens33</code>   <em>注意vi后面加空格</em>.</li></ol><p><img src="http://pdwm7er91.bkt.clouddn.com/centos_ip.png" alt="图1 ens33网卡的配置"></p><ol start="4"><li>将<code>ONBOOT=no</code> 改为 <code>yes</code>.</li><li>然后重启网络服务：<code>sudo service network restart</code>.</li><li>输入 <code>ip addr</code>.</li></ol><p><img src="http://pdwm7er91.bkt.clouddn.com/centos_ip2.png" alt="图2 ip地址"></p><ul><li>由图可知,IP地址为:<code>192.168.43.128</code></li></ul><h2 id="1-3-安装XShell"><a href="#1-3-安装XShell" class="headerlink" title="1.3 安装XShell"></a>1.3 安装XShell</h2><ul><li>Xshell就是一个远程控制Centos的软件,详细介绍请看 <a href="https://baike.baidu.com/item/Xshell/5659054?fr=aladdin" target="_blank" rel="noopener">百度百科</a>.</li><li><a href="https://cdn.netsarang.net/63b77b13/Xshell-6.0.0098p.exe" target="_blank" rel="noopener">下载地址:</a> <code>https://cdn.netsarang.net/63b77b13/Xshell-6.0.0098p.exe</code></li><li>安装步骤”<strong>下一步</strong>“即可.</li><li>连接虚拟机:<ol><li>点新建连接.</li><li>输入名称，主机地址 协议 ssh 端口 22 不用改.<br><img src="http://pdwm7er91.bkt.clouddn.com/centos_ip3.png" alt="图3 XSHell安装"></li><li>输入用户名,密码<br><img src="http://pdwm7er91.bkt.clouddn.com/centos_ip4.png" alt="图4 XSHell安装"></li><li>点连接即可操作虚拟机.</li></ol></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;centos7安装和配置&quot;&gt;&lt;a href=&quot;#centos7安装和配置&quot; class=&quot;headerlink&quot; title=&quot;centos7安装和配置&quot;&gt;&lt;/a&gt;centos7安装和配置&lt;/h1&gt;&lt;h2 id=&quot;1-前期准备&quot;&gt;&lt;a href=&quot;#1-前期准备&quot; class=&quot;headerlink&quot; title=&quot;1.前期准备&quot;&gt;&lt;/a&gt;1.前期准备&lt;/h2&gt;&lt;h3 id=&quot;1-1-安装虚拟机&quot;&gt;&lt;a href=&quot;#1-1-安装虚拟机&quot; class=&quot;headerlink&quot; title=&quot;1.1 安装虚拟机&quot;&gt;&lt;/a&gt;1.1 安装虚拟机&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://download3.vmware.com/software/wkst/file/VMware-workstation-full-14.1.3-9474260.exe&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;VMware-workstation14下载地址:&lt;/a&gt; &lt;code&gt;http://download3.vmware.com/software/wkst/file/VMware-workstation-full-14.1.3-9474260.exe&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;安装步骤”&lt;strong&gt;下一步&lt;/strong&gt;“即可.&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="centos" scheme="http://yoursite.com/tags/centos/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring源码学习(三)--AOP</title>
