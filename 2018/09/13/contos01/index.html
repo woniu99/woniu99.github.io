@@ -19,7 +19,7 @@
 <meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/centos_ip2.png">
 <meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/centos_ip3.png">
 <meta property="og:image" content="http://pdwm7er91.bkt.clouddn.com/centos_ip4.png">
-<meta property="og:updated_time" content="2018-09-13T08:04:40.217Z">
+<meta property="og:updated_time" content="2018-09-14T03:32:28.460Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos7学习(一)--centos7安装和配置">
 <meta name="twitter:description" content="centos7安装和配置1.前期准备1.1 安装虚拟机 VMware-workstation14下载地址: http://download3.vmware.com/software/wkst/file/VMware-workstation-full-14.1.3-9474260.exe 安装步骤”下一步“即可.">
@@ -150,6 +150,45 @@
 </ol>
 </li>
 </ul>
+<h2 id="1-4-安装vsftp服务"><a href="#1-4-安装vsftp服务" class="headerlink" title="1.4 安装vsftp服务"></a>1.4 安装vsftp服务</h2><ul>
+<li>我们需要向centos操作系统的服务器上上传文件或者下载文件，这时候，ftp有必要安装下.</li>
+</ul>
+<ol>
+<li>安装 vsftp : <code>yum install -y vsftpd</code></li>
+<li>设置开机启动 : <code>systemctl enable vsftpd</code></li>
+<li>启动ftp服务 : <code>systemctl start vsftpd.service</code></li>
+<li><p>打开防火墙 :</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=21/tcp --permanent (永久添加tcp 21端口)</span><br><span class="line">firewall-cmd --permanent --zone=public --add-service=ftp (添加ftp服务)</span><br><span class="line">firewall-cmd --reload (重启防火墙)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改vsftp配置文件,禁止匿名登录 <code>vi /etc/vsftpd/vsftpd.conf</code></p>
+<ul>
+<li>把：anonymous_enable=YES 改为： anonymous_enable=NO输入—&gt;   :wq!  保存退出.</li>
+</ul>
+</li>
+<li>验证:使用 Xftp:<ul>
+<li><a href="https://cdn.netsarang.net/63b77b13/Xftp-6.0.0092p.exe" target="_blank" rel="noopener">Xftp下载地址</a> <code>https://cdn.netsarang.net/63b77b13/Xftp-6.0.0092p.exe</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="1-5-安装-JDK"><a href="#1-5-安装-JDK" class="headerlink" title="1.5 安装 JDK"></a>1.5 安装 JDK</h2><ol>
+<li><a href="http://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jdk-8u181-linux-x64.tar.gz?AuthParam=1536831975_0718afc6c03e08ad448d55708d374ad2" target="_blank" rel="noopener">JDK下载地址:</a></li>
+<li>使用Xftp将JDK上传到 /home/data目录下.</li>
+<li><p>解压并剪切到 /home/java/ 目录:</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cd /home/data/</span><br><span class="line">[root@localhost data]# ls</span><br><span class="line">jdk-8u181-linux-x64.tar.gz</span><br><span class="line">[root@localhost data]# tar -zxvf jdk-8u181-linux-x64.tar.gz</span><br><span class="line">[root@localhost ~]# mkdir /home/java</span><br><span class="line">[root@localhost ~]# mv /home/data/jdk1.8.0_181/ /home/java/</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>授予root权限 : <code>chown root:root -R /home/java/jdk1.8.0_181</code></p>
+</li>
+<li><p>配置环境变量 :</p>
+<ul>
+<li><code>vi /etc/profile</code></li>
+<li>在文件末尾加入如下代码,保存退出:<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#java environment</span><br><span class="line">export JAVA_HOME=/home/java/jdk1.8.0_181</span><br><span class="line">export CLASSPATH=.:$&#123;JAVA_HOME&#125;/jre/lib/rt.jar:$&#123;JAVA_HOME&#125;/lib/dt.jar:$&#123;JAVA_HOME&#125;/lib/tools.jar$&#123;JAVA_HOME&#125;/bin</span><br><span class="line">export PATH=$PATH:$JRE_HOME/bin</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使环境变量生效: <code>source /etc/profile</code></p>
+</li>
+<li>测试: <code>[root@localhost ~]# java -version</code></li>
+</ol>
 
       
     </div>
@@ -158,7 +197,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/09/13/contos01/" data-id="cjm0evz8r0000wcy5bgx7b8jb" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/09/13/contos01/" data-id="cjm1g8lb00000o4y5i74vudwj" class="article-share-link">Share</a>
         
       </div>
     </footer>
