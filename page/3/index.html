@@ -82,6 +82,117 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-spring01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/08/20/spring01/" class="article-date">
+  <time datetime="2018-08-20T07:45:39.000Z" itemprop="datePublished">2018-08-20</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/20/spring01/">Spring源码学习(一)--IOC</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Spring-容器-IOC-初始化过程"><a href="#Spring-容器-IOC-初始化过程" class="headerlink" title="Spring 容器 IOC 初始化过程"></a>Spring 容器 IOC 初始化过程</h1><h2 id="1-定义"><a href="#1-定义" class="headerlink" title="1. 定义"></a>1. 定义</h2><ul>
+<li><strong>IOC(Inversion of Control)控制反转:</strong> 控制反转就是把原先我们代码里面需要实现的对象创建,依赖的代码,反转给容器来帮忙实现.那么必然的我们需要创建一个容器,同时需要一种描述来让容器知道需要创建的对象与对象之间的关系.这个描述最具体的表现就是我们可配置的文件.</li>
+<li><strong>DI(Dependency Injection)依赖注入:</strong> 就是指对象是被动接受依赖类而不是自己去找,换句话说就是指对象不是从容器中查找它的依赖类,而是在容器实例化对象的时候主动将它依赖的类注入给它.</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2018/08/20/spring01/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
+
+        <a data-url="http://yoursite.com/2018/08/20/spring01/" data-id="cjmkeg1q6000jfsy5nrgo0r11" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
+    <article id="post-cglib-proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/08/19/cglib-proxy/" class="article-date">
+  <time datetime="2018-08-19T04:05:22.000Z" itemprop="datePublished">2018-08-19</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/19/cglib-proxy/">设计模式之--代理模式(三)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="CGLIB动态代理"><a href="#CGLIB动态代理" class="headerlink" title="CGLIB动态代理"></a>CGLIB动态代理</h1><ul>
+<li>JDK代理要求被代理类必须实现接口,有很强的局限性.而CGLIB动态代理则没有此强制性要求.简单的说,CGLIB会让生成的代理类继承被代理类,并在代理类中对代理方法进行强制处理(前置处理,后置处理等).在CGLIB底层,其实是借助了ASM这个强大的Java字节码生成框架.</li>
+</ul>
+        
+          <p class="article-more-link">
+            <a href="/2018/08/19/cglib-proxy/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+
+        <a data-url="http://yoursite.com/2018/08/19/cglib-proxy/" data-id="cjmkeg1pa0000fsy5qvcwpohz" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-jdk-proxy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <h3 href="/2018/08/18/jdk-proxy/" class="article-date">
@@ -123,7 +234,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/08/18/jdk-proxy/" data-id="cjma063jq000cl8y5m4tdljdg" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/08/18/jdk-proxy/" data-id="cjmkeg1q8000lfsy5km76s9yu" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -181,117 +292,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/08/17/proxy/" data-id="cjma063js000fl8y5ore18vtn" class="article-share-link">Share</a>
-        
-      </div>
-    </footer>
-  </div>
-  </div>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-factory-method" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <h3 href="/2018/08/16/factory-method/" class="article-date">
-  <time datetime="2018-08-16T07:42:47.000Z" itemprop="datePublished">2018-08-16</time>
-</h3>
-    
-  </div>
-  <div class="article-inner">
-  <div class="curve-down">
-  <div class="fill-content">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/16/factory-method/">设计模式之--工厂模式(二)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="2-工厂方法模式"><a href="#2-工厂方法模式" class="headerlink" title="2.工厂方法模式"></a>2.工厂方法模式</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><ul>
-<li><strong>工厂方法模式(Factory Method Pattern)：</strong>定义一个用于创建对象的接口，让子类决定将哪一个类实例化。工厂方法模式让一个类的实例化延迟到其子类。工厂方法模式又简称为工厂模式(Factory Pattern)，又可称作虚拟构造器模式(Virtual Constructor Pattern)或多态工厂模式(Polymorphic Factory Pattern)。</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2018/08/16/factory-method/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <div class="article-footer-content">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-        <a data-url="http://yoursite.com/2018/08/16/factory-method/" data-id="cjma063jh0003l8y5ewxqd2pf" class="article-share-link">Share</a>
-        
-      </div>
-    </footer>
-  </div>
-  </div>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-factory" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <h3 href="/2018/08/15/factory/" class="article-date">
-  <time datetime="2018-08-15T06:39:59.000Z" itemprop="datePublished">2018-08-15</time>
-</h3>
-    
-  </div>
-  <div class="article-inner">
-  <div class="curve-down">
-  <div class="fill-content">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/15/factory/">设计模式之--工厂模式(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-简单工厂模式"><a href="#1-简单工厂模式" class="headerlink" title="1. 简单工厂模式"></a>1. 简单工厂模式</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><ul>
-<li><strong>简单工厂模式(Simple Factory Pattern)：</strong>定义一个工厂类，它可以根据参数的不同返回不同类的实例，被创建的实例通常都具有共同的父类。因为在简单工厂模式中用于创建实例的方法是静态(static)方法，因此简单工厂模式又被称为静态工厂方法(Static Factory Method)模式，它属于类创建型模式。</li>
-</ul>
-        
-          <p class="article-more-link">
-            <a href="/2018/08/15/factory/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <div class="article-footer-content">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-
-        <a data-url="http://yoursite.com/2018/08/15/factory/" data-id="cjma063jd0001l8y5k0v708t8" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/08/17/proxy/" data-id="cjmkeg1q4000ifsy5nbnh5ct4" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -323,7 +324,15 @@
       <ul>
         
           <li>
-            <a href="/2018/09/18/zookeeper02/">zookeeper学习(二)--数据模型和指令</a>
+            <a href="/2018/09/27/zookeeper04/">zookeeper学习(四)--curator的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/20/zookeeper03/">zookeeper学习(三)--java API 使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/19/zookeeper02/">zookeeper学习(二)--数据模型和指令</a>
           </li>
         
           <li>
@@ -332,14 +341,6 @@
         
           <li>
             <a href="/2018/09/13/contos01/">centos7学习(一)--centos7安装和配置</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/30/spring03/">Spring源码学习(三)--AOP</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/30/mybatis01/">Mybatis学习系列(一)</a>
           </li>
         
       </ul>
@@ -354,7 +355,7 @@
         <h3 class="widget-title">Tag Cloud</h3>
         <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Spring/" style="font-size: 16.67px;">Spring</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/java/" style="font-size: 13.33px;">java</a> <a href="/tags/zookeeper/" style="font-size: 13.33px;">zookeeper</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/zookeeper/" style="font-size: 17.5px;">zookeeper</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
             </canvas>
         </div>
     </div>
@@ -364,7 +365,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

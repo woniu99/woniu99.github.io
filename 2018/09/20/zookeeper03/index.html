@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  
+  <title>zookeeper学习(三)--java API 使用 | Snail99 Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="java API 使用 引入jar包:  12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.12&amp;lt;/version&amp;gt;&amp;lt;/depen">
+<meta name="keywords" content="zookeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="zookeeper学习(三)--java API 使用">
+<meta property="og:url" content="http://yoursite.com/2018/09/20/zookeeper03/index.html">
+<meta property="og:site_name" content="Snail99 Blog">
+<meta property="og:description" content="java API 使用 引入jar包:  12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.12&amp;lt;/version&amp;gt;&amp;lt;/depen">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-21T09:46:09.491Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="zookeeper学习(三)--java API 使用">
+<meta name="twitter:description" content="java API 使用 引入jar包:  12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.4.12&amp;lt;/version&amp;gt;&amp;lt;/depen">
+  
+    <link rel="alternative" href="/atom.xml" title="Snail99 Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="img/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/mystyle.css">
+  
+    <link rel="stylesheet" href="/css/fonts.googleapis.com.css">
+  
+  <!--[if lt IE 9]><script src="/js/html5shiv.min.js"></script><![endif]-->
+  
+  
+
+</head>
+
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <nav id="upper-nav" class="inner">
+      <a id="main-nav-toggle" class="nav-icon"></a>
+      <div class="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        
+          <a id="nav-github" class="nav-icon" href="https://github.com/woniu99"></a>
+        
+      </div>
+    </nav>
+    <div id="header-title">
+      
+        <h1 id="blog-title-wrap">
+          <a href="/" id="blog-title">Snail99&#39;s Blog</a>
+        </h1>
+      
+    </div>
+    <div id="contenedor">
+      <ul class="cube">
+        <li class="cara">Snail</li>
+        <li class="cara cara-bg1"><svg t="1534588089978" class="icon" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1212 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2573" id="mx_n_1534588089982"><path d="M700.021726 713.073395c-18.333171-68.462888-2.90498-132.34786 46.284575-191.654917 49.18341-59.299375 116.194576-97.621756 201.045789-114.964069C917.45584 305.221016 859.847836 222.300823 774.534222 157.690758c-85.313613-64.611601-182.45607-96.913561-291.436588-96.913561-26.043426 0-52.086853 2.172206-78.124135 6.522762-26.044963 4.350556-50.864027 10.38173-74.471019 18.098131-23.600847 7.711791-46.501181 17.354603-68.685639 28.923827-22.178313 11.569223-43.391885 24.591705-63.633033 39.065908-20.241148 14.468058-39.047473 30.622879-56.418975 48.456781-17.373038 17.833902-33.280528 36.635618-47.719398 56.418975-14.437334 19.778748-27.687175 40.74038-39.755668 62.895651-12.060812 22.15527-21.950954 45.047923-29.667354 68.685639-7.711791 23.631571-13.742965 48.456781-18.093522 74.463338-4.350556 26.014238-6.528907 52.05152-6.528907 78.125671 0 52.080708 8.19109 102.697405 24.579415 151.851626 16.38218 49.152685 39.522163 93.504704 69.424558 133.0622 29.89625 39.557496 64.60392 74.019372 104.132228 103.393309 39.526772 29.375473 83.87879 52.268126 133.0622 68.679494 49.18341 16.419049 99.800106 24.610139 151.851626 24.579415 73.275845 0 141.744878-15.180861 205.396346-45.539511 63.656076-30.364795 118.131741-72.063773 163.426995-125.10615C769.919437 829.261826 719.308885 782.496417 700.021726 713.073395L700.021726 713.073395zM483.050012 731.910444c-52.082244 0-96.686202-18.560531-133.801118-55.675448-37.121062-37.121062-55.681592-81.726555-55.681592-133.807263 0-34.709206 8.436884-66.536477 25.316798-95.478738 16.88145-28.942261 40.019896-51.841059 69.424558-68.685639 29.404661-16.84458 60.986137-25.281465 94.741355-25.318334 53.040841 0 98.119489 18.560531 135.24055 55.681592 37.114917 37.116453 55.675448 81.72041 55.675448 133.801118 0 34.709206-8.436884 66.538013-25.316798 95.478738-16.88145 28.942261-40.019896 51.841059-69.424558 68.685639C549.821529 723.436691 517.763827 731.87972 483.050012 731.910444L483.050012 731.910444zM1211.995579 218.454145c-13.51407-26.997415-27.988273-51.816479-43.416464-74.463338-15.428192-22.646859-31.102177-41.207389-47.023493-55.681592-15.91978-14.474203-32.068456-27.244745-48.456781-38.322381-16.38218-11.077635-32.28967-19.514519-47.711717-25.316798-15.428192-5.802278-30.129754-10.633669-44.112369-14.486493-13.97647-3.852823-26.745476-6.031174-38.320844-6.528907-11.57076-0.491588-21.686725-0.737382-30.35865-0.737382-8.670389 0.006145-15.428192 0.479299-20.270336 1.433287l-7.218667 0L809.891711-1.5e-05c42.425607 54.9565 79.065833 107.024918 109.922217 156.208328 30.856383 49.177265 54.475665 91.128181 70.857845 125.837388 16.38218 34.715351 29.632021 65.817529 39.755668 93.306532 10.123647 27.49054 16.154821 50.874781 18.091986 70.16194 1.944846 19.28716 2.671475 33.988722 2.178351 44.106224-0.491588 10.117502-1.697516 18.560531-3.611638 25.316798-38.568175-19.285624-81.466935-22.663757-128.705498-10.1344-44.370453 12.529357-78.84001 36.148638-103.394846 70.857845-24.560981 34.709206-32.026978 69.897712-22.401064 105.567051 9.625913 35.667804 33.490989 61.946271 71.595227 78.820039 38.105774 16.875305 79.331598 19.053655 123.665182 6.522762 22.185995-6.756267 42.444041-16.640264 60.771068-29.661209 18.327026-13.022481 33.028589-27.724044 44.106224-44.106224 11.077635-16.388325 18.542096-34.217618 22.401064-53.503242 51.097531-78.094947 25.054105-216.463227-78.125671-415.107915l-52.068418-92.563005L1211.995579 218.454145zM483.050012 439.728793c-18.327026 0-35.435835 4.585597-51.324891 13.74911-15.890592 9.163513-28.432238 21.70516-37.632621 37.631084-9.192701 15.91978-13.776762 33.028589-13.741429 51.324891 0 27.951404 10.117502 52.06381 30.35865 72.340291 20.241148 20.270336 44.585523 30.387838 73.036196 30.357114 28.444528-0.029188 52.555398-10.152835 72.334146-30.357114 19.778748-20.210424 29.667354-44.328975 29.667354-72.340291 0-28.017461-9.888606-52.129867-29.667354-72.340291C536.307459 449.883163 511.961549 439.765662 483.050012 439.728793L483.050012 439.728793zM483.050012 439.728793" p-id="2574" data-spm-anchor-id="a313x.7781069.0.i0"></path></svg></li>
+        <li class="cara">L</li>
+        <li class="cara">O</li>
+        <li class="cara">V</li>
+        <li class="cara">E</li>
+      </ul>
+    </div>
+    <nav id="main-nav">
+      
+        <a class="main-nav-link" href="/">首页</a>
+      
+        <a class="main-nav-link" href="/archives">归档</a>
+      
+        <a class="main-nav-link" href="/about">关于</a>
+      
+      <a class="main-nav-link st-search-show-outputs">Search</a>
+    </nav>
+  </div>
+</header>
+
+    <div class="outer">
+      <section id="main"><article id="post-zookeeper03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/09/20/zookeeper03/" class="article-date">
+  <time datetime="2018-09-20T03:15:05.000Z" itemprop="datePublished">2018-09-20</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      zookeeper学习(三)--java API 使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+        <h1 id="java-API-使用"><a href="#java-API-使用" class="headerlink" title="java API 使用"></a>java API 使用</h1><ul>
+<li>引入jar包:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.zookeeper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>zookeeper<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.4.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="1-创建会话"><a href="#1-创建会话" class="headerlink" title="1. 创建会话"></a>1. 创建会话</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.zookeeper.*;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.CountDownLatch;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateSessionDemo</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span>  <span class="keyword">static</span> String CONNECTSTRING = <span class="string">"192.168.6.133:2181,192.168.6.129:2181,192.168.6.130:2181"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(<span class="number">1</span>);</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, InterruptedException, KeeperException </span>&#123;</span><br><span class="line"></span><br><span class="line">        ZooKeeper zooKeeper = <span class="keyword">new</span> ZooKeeper(CONNECTSTRING, <span class="number">5000</span>, <span class="keyword">new</span> Watcher() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 如果当前的连接状态是连接成功的,那么通过计数器去控制</span></span><br><span class="line">                <span class="keyword">if</span> (event.getState()==Event.KeeperState.SyncConnected) &#123;</span><br><span class="line">                    countDownLatch.countDown();</span><br><span class="line">                    System.out.println(event.getState());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        countDownLatch.await();</span><br><span class="line">        System.out.println(zooKeeper.getState());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>输出结果为:</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SyncConnected</span><br><span class="line">CONNECTED</span><br></pre></td></tr></table></figure>
+<h2 id="2-节点操作"><a href="#2-节点操作" class="headerlink" title="2.节点操作"></a>2.节点操作</h2><h3 id="2-1-新建节点"><a href="#2-1-新建节点" class="headerlink" title="2.1 新建节点"></a>2.1 新建节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZKNodeOperator</span> <span class="keyword">implements</span> <span class="title">Watcher</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ZooKeeper  zooKeeper = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ZK_SERVER_PATH = <span class="string">"192.168.6.133:2181,192.168.6.129:2181,192.168.6.130:2181"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Integer TIMEOUT = <span class="number">5000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ZKNodeOperator</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ZKNodeOperator</span><span class="params">(String connectString)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            zooKeeper = <span class="keyword">new</span> ZooKeeper(connectString,TIMEOUT, <span class="keyword">new</span> ZKNodeOperator());</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">            <span class="keyword">if</span> (zooKeeper != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    zooKeeper.close();</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e1) &#123;</span><br><span class="line">                    e1.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createZKNode</span><span class="params">(String path, <span class="keyword">byte</span>[]data, List&lt;ACL&gt; acls)</span> </span>&#123;</span><br><span class="line">        String result = <span class="string">""</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 同步或者异步创建节点,都不支持子节点的递归创建,异步有一个callback函数</span></span><br><span class="line"><span class="comment">             * 参数:</span></span><br><span class="line"><span class="comment">             * path: 创建的路径</span></span><br><span class="line"><span class="comment">             * data: 存储的数据的byte[]</span></span><br><span class="line"><span class="comment">             * acl: 控制权限策略</span></span><br><span class="line"><span class="comment">             *          Ids.OPEN_ACL_UNSAFE --&gt; world:anyone:crdwa</span></span><br><span class="line"><span class="comment">             *          CREATOR_ALL_ACL --&gt; auth:user:password:crdwa</span></span><br><span class="line"><span class="comment">             *  createMode: 节点类型,是一个枚举类型</span></span><br><span class="line"><span class="comment">             *      PERSISTENT : 持久节点</span></span><br><span class="line"><span class="comment">             *      PERSISTENT_SEQUENTIAL : 持久顺序节点</span></span><br><span class="line"><span class="comment">             *      EPHEMERAL :临时节点</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="comment">// 1.创建临时节点</span></span><br><span class="line">            <span class="comment">//result = zooKeeper.create(path,data,acls, CreateMode.EPHEMERAL);</span></span><br><span class="line">            <span class="comment">// 2. 创建永久节点</span></span><br><span class="line">            String ctx = <span class="string">"&#123;'create':'success'&#125;"</span>;</span><br><span class="line">            zooKeeper.create(path,data,acls,CreateMode.PERSISTENT,<span class="keyword">new</span> CreateCallBack(),ctx);</span><br><span class="line"></span><br><span class="line">            System.out.println(<span class="string">"创建节点: \t"</span> + result + <span class="string">"\t成功..."</span>);</span><br><span class="line">            Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ZKNodeOperator zkServer = <span class="keyword">new</span> ZKNodeOperator(ZK_SERVER_PATH);</span><br><span class="line"></span><br><span class="line">        zkServer.createZKNode(<span class="string">"/testNode"</span>,<span class="string">"testNode"</span>.getBytes(),Ids.OPEN_ACL_UNSAFE);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setZooKeeper</span><span class="params">(ZooKeeper zooKeeper)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.zooKeeper = zooKeeper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ZooKeeper <span class="title">getZooKeeper</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> zooKeeper;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">process</span><span class="params">(WatchedEvent event)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CreateCallBack</span> <span class="keyword">implements</span> <span class="title">AsyncCallback</span>.<span class="title">StringCallback</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processResult</span><span class="params">(<span class="keyword">int</span> rc, String path, Object ctx, String name)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"创建节点: "</span> + path);</span><br><span class="line">        System.out.println((String) ctx);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-修改节点"><a href="#2-2-修改节点" class="headerlink" title="2.2 修改节点"></a>2.2 修改节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 参数 :</span></span><br><span class="line"><span class="comment"> * path : 节点路径</span></span><br><span class="line"><span class="comment"> * data : 数据</span></span><br><span class="line"><span class="comment"> * vsrsion : 数据版本,与原数据信息中的&lt;b&gt;dataVersion&lt;/b&gt;的值保持一致,修改完成后值改变</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">Stat stat = zkServer.getZooKeeper().setData(<span class="string">"/testNode"</span>,<span class="string">"xyz"</span>.getBytes(),<span class="number">0</span>);</span><br><span class="line">System.out.println(stat.getVersion());</span><br></pre></td></tr></table></figure>
+<h3 id="2-3-删除节点"><a href="#2-3-删除节点" class="headerlink" title="2.3 删除节点"></a>2.3 删除节点</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 参数 :</span></span><br><span class="line"><span class="comment">* path : 路径</span></span><br><span class="line"><span class="comment">* version : 数据版本</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line">zkServer.getZooKeeper().delete(<span class="string">"/testNode"</span>,<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-节点查询"><a href="#2-4-节点查询" class="headerlink" title="2.4 节点查询"></a>2.4 节点查询</h3><h4 id="2-4-1-获取节点数据"><a href="#2-4-1-获取节点数据" class="headerlink" title="2.4.1 获取节点数据"></a>2.4.1 获取节点数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 参数 :</span></span><br><span class="line"><span class="comment">* path : 节点路径</span></span><br><span class="line"><span class="comment">* watch: true/false,注册一个watch事件</span></span><br><span class="line"><span class="comment">* stat: 状态</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">byte</span>[] resByte = zkServer.getZooKeeper().getData(<span class="string">"/testNode"</span>,<span class="keyword">true</span>,stat);</span><br><span class="line">String result = <span class="keyword">new</span> String(resByte);</span><br><span class="line">System.out.println(<span class="string">"当前值: "</span> + result);</span><br><span class="line">countDown.await();</span><br></pre></td></tr></table></figure>
+<h4 id="2-4-2-获取子节点数据"><a href="#2-4-2-获取子节点数据" class="headerlink" title="2.4.2 获取子节点数据"></a>2.4.2 获取子节点数据</h4><h4 id="2-4-3-判断节点是否存在"><a href="#2-4-3-判断节点是否存在" class="headerlink" title="2.4.3 判断节点是否存在"></a>2.4.3 判断节点是否存在</h4>
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
+
+        <a data-url="http://yoursite.com/2018/09/20/zookeeper03/" data-id="cjmkeg1qe000ufsy5b12jmat0" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/09/27/zookeeper04/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          zookeeper学习(四)--curator的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/09/19/zookeeper02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">zookeeper学习(二)--数据模型和指令</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+  <!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTAzMC8xNTU1Nw==">
+<script type="text/javascript">
+   (function(d, s) {
+       var j, e = d.getElementsByTagName(s)[0];
+
+       if (typeof LivereTower === 'function') { return; }
+
+       j = d.createElement(s);
+       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+       j.async = true;
+
+       e.parentNode.insertBefore(j, e);
+   })(document, 'script');
+</script>
+<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->  
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/27/zookeeper04/">zookeeper学习(四)--curator的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/20/zookeeper03/">zookeeper学习(三)--java API 使用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/19/zookeeper02/">zookeeper学习(二)--数据模型和指令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/18/zookeeper01/">zookeeper学习(一)--zookeeper简介及环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/13/contos01/">centos7学习(一)--centos7安装和配置</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+    <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+    <div class="widget-wrap">
+        <h3 class="widget-title">Tag Cloud</h3>
+        <div id="myCanvasContainer" class="widget tagcloud">
+            <canvas width="250" height="250" id="resCanvas" style="width=100%">
+                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/zookeeper/" style="font-size: 17.5px;">zookeeper</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+            </canvas>
+        </div>
+    </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 Snail99<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/sun11/hexo-theme-paperbox" target="_blank">Paperbox</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+    <a href="/about" class="mobile-nav-link">关于</a>
+  
+  <a href="#search" class="mobile-nav-link st-search-show-outputs">Search</a>
+</nav>
+
+  
+
+<!-- totop start -->
+<div id="totop">
+	<a title="To Top"></a>
+</div>
+<!-- totop end -->
+
+<!-- swiftype search start -->
+
+<!-- swiftype search end -->
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/lrsjng.jquery-qrcode/0.12.0/jquery.qrcode.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+</div>
+</body>
+</html>
