@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-11T09:17:07.184Z</updated>
+  <updated>2018-10-11T10:14:56.226Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>工具指南--Weblogic安装及使用</title>
+    <link href="http://yoursite.com/2018/10/11/tool-01/"/>
+    <id>http://yoursite.com/2018/10/11/tool-01/</id>
+    <published>2018-10-11T09:58:35.000Z</published>
+    <updated>2018-10-11T10:14:56.226Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Weblogic安装及使用"><a href="#Weblogic安装及使用" class="headerlink" title="Weblogic安装及使用"></a>Weblogic安装及使用</h1><h2 id="1-WebLogic版本是12-X-X对JDK的支持"><a href="#1-WebLogic版本是12-X-X对JDK的支持" class="headerlink" title="1. WebLogic版本是12.X.X对JDK的支持:"></a>1. WebLogic版本是12.X.X对JDK的支持:</h2><p><img src="http://i2.bvimg.com/664803/841d6c179035a806.png" alt="版本支持"></p><blockquote><p><strong>12.1.3支持jdk1.7,12.2.x只支持jdk1.8</strong></p></blockquote><a id="more"></a><h2 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h2><ol><li>在Oracle官网下载其安装文件为fmw_12.1.3.0.0_wls.jar.</li><li>使用 java –d64 –jar E:\soft\WebLogic\fmw_12.1.3.0.0_wls.jar  启动程序安装</li><li>按照指示不断下一步即可安装成功.</li></ol><h2 id="3-eclipse启动weblogic显示乱码问题"><a href="#3-eclipse启动weblogic显示乱码问题" class="headerlink" title="3. eclipse启动weblogic显示乱码问题"></a>3. eclipse启动weblogic显示乱码问题</h2><p><img src="http://i2.bvimg.com/664803/d8c2c387b4657b49.png" alt="显示乱码"></p><blockquote><p>修改Run Configurations中的编码即可解决乱码问题.</p></blockquote><h2 id="4-eclipse添加weblogic失败问题"><a href="#4-eclipse添加weblogic失败问题" class="headerlink" title="4. eclipse添加weblogic失败问题"></a>4. eclipse添加weblogic失败问题</h2><p><img src="http://i2.bvimg.com/664803/a75b3e40bb6675da.png" alt="eclipse添加报错"></p><ul><li><strong>解决办法:</strong></li><li>修改此文件:</li></ul><p><img src="http://i2.bvimg.com/664803/222ad11117cf6e73.png" alt="eclipse添加报错解决"></p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><br><span class="line">    <span class="tag">&lt;<span class="name">domain-registry</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.oracle.com/weblogic/domain-registry"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">domain</span> <span class="attr">location</span>=<span class="string">"D:\WebLogic\user_projects\domains\bj_rescenter"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">domain-registry</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Weblogic安装及使用&quot;&gt;&lt;a href=&quot;#Weblogic安装及使用&quot; class=&quot;headerlink&quot; title=&quot;Weblogic安装及使用&quot;&gt;&lt;/a&gt;Weblogic安装及使用&lt;/h1&gt;&lt;h2 id=&quot;1-WebLogic版本是12-X-X对JDK的支持&quot;&gt;&lt;a href=&quot;#1-WebLogic版本是12-X-X对JDK的支持&quot; class=&quot;headerlink&quot; title=&quot;1. WebLogic版本是12.X.X对JDK的支持:&quot;&gt;&lt;/a&gt;1. WebLogic版本是12.X.X对JDK的支持:&lt;/h2&gt;&lt;p&gt;&lt;img src=&quot;http://i2.bvimg.com/664803/841d6c179035a806.png&quot; alt=&quot;版本支持&quot;&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;12.1.3支持jdk1.7,12.2.x只支持jdk1.8&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+      <category term="工具指南" scheme="http://yoursite.com/tags/%E5%B7%A5%E5%85%B7%E6%8C%87%E5%8D%97/"/>
+    
+  </entry>
   
   <entry>
     <title>Spring Boot学习(一)--Spring Boot入门</title>

@@ -82,6 +82,62 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-zookeeper02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <h3 href="/2018/09/19/zookeeper02/" class="article-date">
+  <time datetime="2018-09-19T07:45:55.000Z" itemprop="datePublished">2018-09-19</time>
+</h3>
+    
+  </div>
+  <div class="article-inner">
+  <div class="curve-down">
+  <div class="fill-content">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/19/zookeeper02/">zookeeper学习(二)--数据模型和指令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="zookeeper数据模型和指令"><a href="#zookeeper数据模型和指令" class="headerlink" title="zookeeper数据模型和指令"></a>zookeeper数据模型和指令</h1><h2 id="1-数据模型"><a href="#1-数据模型" class="headerlink" title="1. 数据模型"></a>1. 数据模型</h2><ul>
+<li>zookeeper 的数据模型和文件系统类似,每一个节点称为: <strong>znode</strong> . znode 是zookeeper中的最小数据单元.每一个 znode上都可以保存数据和挂载子节点.从而构成一个层次化的属性结构节点特性.</li>
+<li><strong>持久化节点</strong> : 节点创建后会一直存在 zookeeper 服务器上,直到主动删除.</li>
+<li><strong>临时节点</strong> : 临时节点的生命周期和客户端的会话保持一致,当客户端会话失效,该节点自动清理.
+        
+          <p class="article-more-link">
+            <a href="/2018/09/19/zookeeper02/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <div class="article-footer-content">
+        
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
+
+        <a data-url="http://yoursite.com/2018/09/19/zookeeper02/" data-id="cjn4f1pcp000v80y5xafoh699" class="article-share-link">Share</a>
+        
+      </div>
+    </footer>
+  </div>
+  </div>
+  </div>
+  
+</article>
+
+
+
+
+
+
+  
     <article id="post-zookeeper01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <h3 href="/2018/09/18/zookeeper01/" class="article-date">
@@ -121,7 +177,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/zookeeper/">zookeeper</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/09/18/zookeeper01/" data-id="cjn4ddr2g000tbwy552z3h6r0" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/09/18/zookeeper01/" data-id="cjn4f1pco000t80y5vfjydx04" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -177,7 +233,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/09/13/contos01/" data-id="cjn4ddr1t0001bwy539lbh1hh" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/09/13/contos01/" data-id="cjn4f1pbz000180y5vefej13j" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -232,62 +288,7 @@
         
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/">Spring</a></li></ul>
 
-        <a data-url="http://yoursite.com/2018/08/30/spring03/" data-id="cjn4ddr2d000obwy5t5o1m1lm" class="article-share-link">Share</a>
-        
-      </div>
-    </footer>
-  </div>
-  </div>
-  </div>
-  
-</article>
-
-
-
-
-
-
-  
-    <article id="post-mybatis01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <h3 href="/2018/08/30/mybatis01/" class="article-date">
-  <time datetime="2018-08-30T02:21:38.000Z" itemprop="datePublished">2018-08-30</time>
-</h3>
-    
-  </div>
-  <div class="article-inner">
-  <div class="curve-down">
-  <div class="fill-content">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/30/mybatis01/">Mybatis学习系列(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Mybatis-基础"><a href="#Mybatis-基础" class="headerlink" title="Mybatis 基础"></a>Mybatis 基础</h1><h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1.概念"></a>1.概念</h2><blockquote>
-<p>MyBatis 是一款优秀的持久层框架，它支持定制化 SQL、存储过程以及高级映射。MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集。MyBatis 可以使用简单的 XML 或注解来配置和映射原生信息，将接口和 Java 的 POJOs(Plain Old Java Objects,普通的 Java对象)映射成数据库中的记录。</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2018/08/30/mybatis01/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <div class="article-footer-content">
-        
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mybatis/">Mybatis</a></li></ul>
-
-        <a data-url="http://yoursite.com/2018/08/30/mybatis01/" data-id="cjn4ddr220009bwy5kw658u4m" class="article-share-link">Share</a>
+        <a data-url="http://yoursite.com/2018/08/30/spring03/" data-id="cjn4f1pck000n80y5j1cruslh" class="article-share-link">Share</a>
         
       </div>
     </footer>
@@ -319,6 +320,10 @@
       <ul>
         
           <li>
+            <a href="/2018/10/11/tool-01/">工具指南--Weblogic安装及使用</a>
+          </li>
+        
+          <li>
             <a href="/2018/10/10/spring-boot/">Spring Boot学习(一)--Spring Boot入门</a>
           </li>
         
@@ -334,10 +339,6 @@
             <a href="/2018/09/19/zookeeper02/">zookeeper学习(二)--数据模型和指令</a>
           </li>
         
-          <li>
-            <a href="/2018/09/18/zookeeper01/">zookeeper学习(一)--zookeeper简介及环境搭建</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -350,7 +351,7 @@
         <h3 class="widget-title">Tag Cloud</h3>
         <div id="myCanvasContainer" class="widget tagcloud">
             <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="/tags/zookeeper/" style="font-size: 17.5px;">zookeeper</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
+                <a href="/tags/HTPP/" style="font-size: 10px;">HTPP</a> <a href="/tags/Mybatis/" style="font-size: 10px;">Mybatis</a> <a href="/tags/Spring/" style="font-size: 15px;">Spring</a> <a href="/tags/centos/" style="font-size: 10px;">centos</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/spring-boot/" style="font-size: 10px;">spring-boot</a> <a href="/tags/zookeeper/" style="font-size: 17.5px;">zookeeper</a> <a href="/tags/工具指南/" style="font-size: 10px;">工具指南</a> <a href="/tags/设计模式/" style="font-size: 20px;">设计模式</a> <a href="/tags/读书笔记/" style="font-size: 10px;">读书笔记</a>
             </canvas>
         </div>
     </div>
@@ -360,7 +361,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
