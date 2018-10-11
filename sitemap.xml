@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/10/10/spring-boot/</loc>
+    
+    <lastmod>2018-10-11T09:17:07.184Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/09/27/zookeeper04/</loc>
     
     <lastmod>2018-09-27T08:01:27.370Z</lastmod>
